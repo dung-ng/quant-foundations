@@ -36,9 +36,11 @@ pip install -r requirements.txt
 
 ## Run scripts (Week 1):
 - From repo root:
-   - python .\week01_monte_carlo\monte_carlo_pi.py
-   - python .\week01_monte_carlo\normal_moments.py
-   - python .\week01_monte_carlo\convergence_experiments.py
+```powershell
+python .\week01_monte_carlo\monte_carlo_pi.py
+python .\week01_monte_carlo\normal_moments.py
+python .\week01_monte_carlo\convergence_experiments.py
+```
 
 ## Sample output (Week 1)
 
