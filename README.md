@@ -30,7 +30,9 @@ Activate venv (PowerShell):
 ```
 
 ## Install dependencies (if needed)
-- pip install -r requirements.txt
+```powershell
+pip install -r requirements.txt
+```
 
 ## Run scripts (Week 1):
 - From repo root:
