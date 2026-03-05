@@ -13,7 +13,7 @@ Weekly self-study projects to build quant fundamentals through **theory + implem
 
 ## Environment
 - Python (virtual environment in `.venv/` — gitignored)
-- Key libraries: `numpy`, `pandas`, `scipy`, `matplotlib`
+- Key libraries: `numpy`
 
 ## Repository structure
 - `week01_monte_carlo/` — Monte Carlo fundamentals:
@@ -27,6 +27,16 @@ Weekly self-study projects to build quant fundamentals through **theory + implem
 Activate venv (PowerShell):
 ```powershell
 .\.venv\Scripts\Activate.ps1
+```
+
+## Install dependencies (if needed)
+- pip install -r requirements.txt
+
+## Run scripts (Week 1):
+- From repo root:
+   - python .\week01_monte_carlo\monte_carlo_pi.py
+   - python .\week01_monte_carlo\normal_moments.py
+   - python .\week01_monte_carlo\convergence_experiments.py
 
 ## Sample output (Week 1)
 
