@@ -25,8 +25,9 @@ Weekly self-study projects to build quant fundamentals through **theory + implem
 
 ## Setup
 Activate venv (PowerShell):
-```powershell```
+```powershell
 .\.venv\Scripts\Activate.ps1
+```
 
 ## Install dependencies (if needed)
 - pip install -r requirements.txt
