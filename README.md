@@ -26,7 +26,7 @@ Weekly self-study projects to build quant fundamentals through **theory + implem
 ## Setup
 Activate venv (PowerShell):
 ```powershell
-.\.venv\Scripts\Activate.ps1```
+.\.venv\Scripts\Activate.ps1
 
 ## Sample output (Week 1)
 
