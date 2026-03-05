@@ -35,7 +35,7 @@ pip install -r requirements.txt
 ```
 
 ## Run scripts (Week 1):
-- From repo root:
+From repo root:
 ```powershell
 python .\week01_monte_carlo\monte_carlo_pi.py
 python .\week01_monte_carlo\normal_moments.py
@@ -54,8 +54,8 @@ python .\week01_monte_carlo\convergence_experiments.py
 - E[X²] ≈ **1.00180**, SE ≈ **0.00447**, CI contains **1**
 
 ### Convergence check (E[X²])
-n = 10³ → SE ≈ 0.0437  
-n = 10⁴ → SE ≈ 0.0143  
-n = 10⁵ → SE ≈ 0.00446  
-n = 10⁶ → SE ≈ 0.00141  
+- n = 10³ → SE ≈ 0.0437  
+- n = 10⁴ → SE ≈ 0.0143  
+- n = 10⁵ → SE ≈ 0.00446  
+- n = 10⁶ → SE ≈ 0.00141  
 (consistent with **SE ∝ 1/√N**)
