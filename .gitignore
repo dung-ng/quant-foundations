@@ -4,3 +4,5 @@ __pycache__/
 .ipynb_checkpoints/
 notes.md
 **/notes.md
+week03_spy_gbm/data/
+week03_spy_gbm/data/*.csv
