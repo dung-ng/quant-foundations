@@ -1,105 +1,138 @@
-# Quant Foundations
+# Quant Foundations Portfolio
 
-Weekly self-study projects to build quant fundamentals through **theory + implementation**:
-- Monte Carlo
-- Estimation
-- Confidence intervals
-- Convergence
-- Correlation & covariance modeling (Cholesky decomposition)
-- GBM simulation & scenario analysis (calibrated from real market data)
+A hands-on portfolio of weekly quantitative finance projects built to develop core quant skills through **theory, implementation, validation, and interpretation**.
 
-## Skills demonstrated
-- Monte Carlo estimators and validation (LLN/CLT intuition in code)
-- Standard error + 95% confidence intervals + coverage checks
-- Vectorized NumPy workflows and clean script structure (`main()`, functions, reproducibility via seeds)
-- Correlated random variable simulation (correlation matrix, Cholesky factorization, validation via empirical moments)
-- Linear algebra applied to quant modeling (matrix factorization, vectorized generation of multivariate normals)
-- Market data ingestion + calibration (yfinance → log returns → annualized μ/σ)
-- Scenario simulation & path-dependent risk (GBM paths, terminal percentiles, loss probability, max drawdown probability)
+## What this repository shows
 
-## Environment
-- Python (virtual environment in `.venv/` — gitignored)
-- Key libraries: `numpy`, `pandas`, `scipy`, `matplotlib`, `yfinance`
+* Monte Carlo simulation and statistical estimation
+* Confidence intervals and convergence diagnostics
+* Correlation and covariance modeling
+* Cholesky decomposition for correlated simulation
+* Geometric Brownian Motion (GBM) calibration and path simulation
+* Single-asset and multi-asset scenario analysis using real market data
+* Portfolio-level return distribution analysis
+
+## Technical skills demonstrated
+
+* Python for quantitative modeling
+* NumPy and pandas for vectorized analysis
+* Monte Carlo methods and simulation validation
+* Statistical estimation, standard errors, and confidence intervals
+* Correlation/covariance estimation and matrix factorization
+* Real-market data ingestion with `yfinance`
+* Data visualization with `matplotlib`
+* Clean script structure, reproducibility, and modular functions
+
+## Project highlights
+
+### Week 1 — Monte Carlo Foundations
+
+Built Monte Carlo estimators for:
+
+* π estimation
+* normal moments
+* convergence experiments
+
+Key ideas:
+
+* Law of Large Numbers
+* Central Limit Theorem
+* standard error
+* 95% confidence intervals
+* empirical `1/sqrt(N)` convergence
+
+### Week 2 — Correlated Normals and Cholesky
+
+Implemented correlated random variable simulation using:
+
+* direct correlation construction
+* Cholesky decomposition
+
+Validated:
+
+* empirical mean
+* empirical variance
+* empirical correlation
+* matrix reconstruction `L @ L.T = Σ`
+
+### Week 3 — SPY GBM Scenario Engine
+
+Downloaded SPY data, calibrated GBM parameters from log returns, and simulated **10,000** three-month scenarios.
+
+Outputs included:
+
+* terminal percentiles
+* probability of loss
+* path-dependent max drawdown probability
+* sample path and terminal distribution plots
+
+### Week 4 — Multi-Asset GBM Scenario Engine
+
+Built a correlated multi-asset simulation engine using **SPY, AAPL, NVDA, and TLT**.
+
+Pipeline:
+
+* estimate daily log-return statistics
+* annualize mean, volatility, and covariance
+* estimate cross-asset correlation
+* generate correlated shocks via Cholesky decomposition
+* simulate **10,000** correlated GBM paths over **63 trading days**
+* evaluate equal-weight portfolio terminal returns
+
+Portfolio summary:
+
+* `p5 = -13.58%`
+* `p50 = 4.48%`
+* `p95 = 28.04%`
+* `Probability of loss = 35.12%`
+
+Key takeaway:
+The portfolio has a positive median outcome but still meaningful downside risk, illustrating how scenario analysis can reveal both upside potential and tail exposure.
 
 ## Repository structure
-- `week01_monte_carlo/` — Monte Carlo fundamentals:
-  - `monte_carlo_pi.py`: π estimation + SE + CI
-  - `normal_moments.py`: estimates of E[X], E[X²], Var(X) + SE/CI
-  - `convergence_experiments.py`: empirical 1/√N convergence + diagnostic ratio
-- `common/` — reusable utilities (WIP)
-- `week02_correlated_normals/` — Correlated normals + Cholesky:
-  - `correlated_normals.py`: generate correlated normals via formula and Cholesky; validate mean/variance/correlation
-- `week03_spy_gbm/` — SPY GBM calibrated simulator + report:
-  - `fetch_data.py`: download SPY data (yfinance) and save CSV
-  - `calibrate.py`: compute log returns and estimate μ/σ
-  - `report.py`: simulate paths, compute terminal percentiles + drawdown probability, save plots
-  - `outputs/`: saved PNG plots
 
-## Setup
-Activate venv (PowerShell):
+* `week01_monte_carlo/`
+* `week02_correlated_normals/`
+* `week03_spy_gbm/`
+* `week04_multi_asset_gbm/`
+
+## Tools and libraries
+
+* Python
+* NumPy
+* pandas
+* SciPy
+* matplotlib
+* yfinance
+
+## How to run
+
+Activate the virtual environment in PowerShell:
+
 ```powershell
 .\.venv\Scripts\Activate.ps1
 ```
 
-## Install dependencies (if needed)
+Install dependencies:
+
 ```powershell
 pip install -r requirements.txt
 ```
 
-## Run scripts (Week 1)
-From repo root:
-```powershell
-python .\week01_monte_carlo\monte_carlo_pi.py
-python .\week01_monte_carlo\normal_moments.py
-python .\week01_monte_carlo\convergence_experiments.py
-```
-## Week 1 Sample output
+Run project scripts from the repository root. Example:
 
-### Monte Carlo π (N=100000)
-- π estimate: **3.14412**
-- SE(π): **0.00519**
-- 95% CI: **[3.13395, 3.15429]** (contains true π)
-
-### Normal moments (X ~ N(0,1), N=100000)
-- E[X] ≈ **0.00097**, SE ≈ **0.00317**, CI contains **0**
-- E[X²] ≈ **1.00180**, SE ≈ **0.00447**, CI contains **1**
-
-### Convergence check (E[X²])
-- n = 10³ → SE ≈ 0.0437  
-- n = 10⁴ → SE ≈ 0.0143  
-- n = 10⁵ → SE ≈ 0.00446  
-- n = 10⁶ → SE ≈ 0.00141  
-(consistent with **SE ∝ 1/√N**)
-
-## Run scripts (Week 2)
-From repo root:
-```powershell
-python .\week02_correlated_normals\correlated_normals.py
-```
-
-### Week 2 sanity check
-- `correlated_normals.py`: empirical correlation should be close to target `rho` (e.g., 0.7), and Cholesky reconstruction `L @ L.T` should match Σ.
-
-## Run scripts (Week 3)
 ```powershell
 python .\week03_spy_gbm\fetch_data.py
 python .\week03_spy_gbm\calibrate.py
 python .\week03_spy_gbm\report.py
 ```
 
-## Week 3 results (SPY GBM scenarios)
-- Using SPY daily data (2021–2026), calibrated GBM (μ≈0.126, σ≈0.169 annualized) and simulated 10,000 3-month scenarios (63 trading days).
-- S0 = 678.27
-- Terminal percentiles: p5 = 605.58, p50 = 697.98, p95 = 798.81
-- P(S_T < S0) = 0.3703
-- P(max drawdown ≤ -10%) = 0.2366
+## Why this portfolio
 
-## Week3 output graphs
-### Sample paths
-![SPY GBM sample paths](week03_spy_gbm/outputs/spy_gbm_sample_paths.png)
+This repository is part of a structured transition into quantitative finance, with each project designed to build practical skill in:
 
-### Terminal distribution
-![SPY GBM terminal distribution](week03_spy_gbm/outputs/spy_gbm_terminal_hist.png)
-
-### Max drawdown distribution
-![SPY GBM max drawdown distribution](week03_spy_gbm/outputs/spy_gbm_max_drawdown_hist.png)
+* simulation
+* statistical reasoning
+* stochastic modeling
+* risk analysis
+* portfolio interpretation
