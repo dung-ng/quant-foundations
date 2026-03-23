@@ -1,3 +1,6 @@
+Yes — here is an updated README with **Week 5** added in the same style as your current version.
+
+````markdown
 # Quant Foundations Portfolio
 
 A hands-on portfolio of weekly quantitative finance projects built to develop core quant skills through **theory, implementation, validation, and interpretation**.
@@ -11,6 +14,8 @@ A hands-on portfolio of weekly quantitative finance projects built to develop co
 * Geometric Brownian Motion (GBM) calibration and path simulation
 * Single-asset and multi-asset scenario analysis using real market data
 * Portfolio-level return distribution analysis
+* European option payoff modeling and Black-Scholes pricing
+* Real-market-data inputs for option pricing examples
 
 ## Technical skills demonstrated
 
@@ -20,6 +25,7 @@ A hands-on portfolio of weekly quantitative finance projects built to develop co
 * Statistical estimation, standard errors, and confidence intervals
 * Correlation/covariance estimation and matrix factorization
 * Real-market data ingestion with `yfinance`
+* Black-Scholes option pricing and payoff modeling
 * Data visualization with `matplotlib`
 * Clean script structure, reproducibility, and modular functions
 
@@ -86,8 +92,39 @@ Portfolio summary:
 * `p95 = 28.04%`
 * `Probability of loss = 35.12%`
 
-Key takeaway:
+Key takeaway:  
 The portfolio has a positive median outcome but still meaningful downside risk, illustrating how scenario analysis can reveal both upside potential and tail exposure.
+
+### Week 5 — Option Payoffs and Black-Scholes Pricing
+
+Built a pricing toolkit for European call and put options, starting from payoff functions and extending to Black-Scholes closed-form pricing.
+
+Pipeline:
+
+* implement call and put payoff functions
+* compute Black-Scholes `d1` and `d2`
+* price European call and put options
+* validate non-negativity of option prices
+* test sensitivity to volatility and maturity
+* verify put-call parity
+* apply the model to a real-market-style SPY example using the latest adjusted close as `S0`
+
+Validation summary:
+
+* baseline call price = `9.41`
+* baseline put price = `6.46`
+* call price increases with volatility
+* call price increases with maturity
+* put-call parity gap ≈ `0.00000000`
+
+SPY example:
+
+* latest adjusted close used as `S0`
+* strike chosen near spot
+* Black-Scholes call and put prices computed under an assumed volatility input
+
+Key takeaway:  
+Option pricing is not about forecasting the stock path directly. It is about valuing a contingent payoff under a pricing framework, and understanding how inputs such as volatility, maturity, and discounting affect that value.
 
 ## Repository structure
 
@@ -95,6 +132,7 @@ The portfolio has a positive median outcome but still meaningful downside risk, 
 * `week02_correlated_normals/`
 * `week03_spy_gbm/`
 * `week04_multi_asset_gbm/`
+* `week05_options/`
 
 ## Tools and libraries
 
@@ -111,7 +149,7 @@ Activate the virtual environment in PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
-```
+````
 
 Install dependencies:
 
@@ -125,6 +163,8 @@ Run project scripts from the repository root. Example:
 python .\week03_spy_gbm\fetch_data.py
 python .\week03_spy_gbm\calibrate.py
 python .\week03_spy_gbm\report.py
+python .\week05_options\option_payoffs.py
+python .\week05_options\black_scholes.py
 ```
 
 ## Why this portfolio
@@ -134,5 +174,6 @@ This repository is part of a structured transition into quantitative finance, wi
 * simulation
 * statistical reasoning
 * stochastic modeling
+* option pricing
 * risk analysis
 * portfolio interpretation
