@@ -1,6 +1,3 @@
-Yes — here is an updated README with **Week 5** added in the same style as your current version.
-
-````markdown
 # Quant Foundations Portfolio
 
 A hands-on portfolio of weekly quantitative finance projects built to develop core quant skills through **theory, implementation, validation, and interpretation**.
@@ -92,7 +89,7 @@ Portfolio summary:
 * `p95 = 28.04%`
 * `Probability of loss = 35.12%`
 
-Key takeaway:  
+**Key takeaway:**  
 The portfolio has a positive median outcome but still meaningful downside risk, illustrating how scenario analysis can reveal both upside potential and tail exposure.
 
 ### Week 5 — Option Payoffs and Black-Scholes Pricing
@@ -123,7 +120,7 @@ SPY example:
 * strike chosen near spot
 * Black-Scholes call and put prices computed under an assumed volatility input
 
-Key takeaway:  
+**Key takeaway:**  
 Option pricing is not about forecasting the stock path directly. It is about valuing a contingent payoff under a pricing framework, and understanding how inputs such as volatility, maturity, and discounting affect that value.
 
 ## Repository structure
@@ -149,7 +146,7 @@ Activate the virtual environment in PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
-````
+```
 
 Install dependencies:
 
