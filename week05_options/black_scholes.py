@@ -3,23 +3,30 @@ from scipy.stats import norm
 import yfinance as yf
 
 def compute_d1_d2(S0, K, T, r, sigma):
+    """Compute the Black-Scholes d1 and d2 terms."""
+    if np.any(T <= 0):
+        raise ValueError("Maturity must be larger than 0.")
+    if np.any(sigma <= 0):
+        raise ValueError("Volatility must be higher than 0.")
+
     d1 = (np.log(S0 / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
     d2 = d1 - sigma * np.sqrt(T)
     return d1, d2
 
 def bs_call_price(S0, K, T, r, sigma):
+    """Return the Black-Scholes price of a European call option."""
     d1, d2 = compute_d1_d2(S0, K, T, r, sigma)
     call_price = S0 * norm.cdf(d1) - K * np.exp(-r * T) * norm.cdf(d2)
-
     return call_price
 
 def bs_put_price(S0, K, T, r, sigma):
+    """Return the Black-Scholes price of a European put option."""
     d1, d2 = compute_d1_d2(S0, K, T, r, sigma)
     put_price = K * np.exp(-r * T) * norm.cdf(-d2) - S0 * norm.cdf(-d1)
-
     return put_price
 
 def fetch_spot_proxy(ticker: str = "SPY", period: str = "1y") -> float:
+    """Fetch the latest adjusted close as a proxy for the current spot price."""
     data = yf.download(
         ticker,
         period=period,
@@ -33,6 +40,7 @@ def fetch_spot_proxy(ticker: str = "SPY", period: str = "1y") -> float:
     return s0
 
 def main():
+    """Run baseline Black-Scholes checks and one SPY example."""
     S0 = 100
     K = 100
     T = 1.0
@@ -94,7 +102,7 @@ def main():
 
     s0 = fetch_spot_proxy("SPY")
     K_SPY = round(s0 / 5) * 5
-    T_SPY = 63/252
+    T_SPY = 63 / 252
     r_SPY = 0.04
     sigma_SPY = 0.20
 

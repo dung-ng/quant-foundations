@@ -6,3 +6,5 @@ notes.md
 **/notes.md
 week03_spy_gbm/data/
 week03_spy_gbm/data/*.csv
+week05_options/__init__.py
+week06_mc_option_pricer/__init__.py

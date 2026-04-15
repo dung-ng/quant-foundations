@@ -13,6 +13,9 @@ A hands-on portfolio of weekly quantitative finance projects built to develop co
 * Portfolio-level return distribution analysis
 * European option payoff modeling and Black-Scholes pricing
 * Real-market-data inputs for option pricing examples
+* Monte Carlo European option pricing with confidence intervals
+* Black-Scholes benchmarking for Monte Carlo validation
+* Implied volatility inversion from real listed option prices
 
 ## Technical skills demonstrated
 
@@ -23,6 +26,8 @@ A hands-on portfolio of weekly quantitative finance projects built to develop co
 * Correlation/covariance estimation and matrix factorization
 * Real-market data ingestion with `yfinance`
 * Black-Scholes option pricing and payoff modeling
+* Numerical root-finding for implied volatility
+* Options-chain handling and contract selection
 * Data visualization with `matplotlib`
 * Clean script structure, reproducibility, and modular functions
 
@@ -89,9 +94,6 @@ Portfolio summary:
 * `p95 = 28.04%`
 * `Probability of loss = 35.12%`
 
-**Key takeaway:**  
-The portfolio has a positive median outcome but still meaningful downside risk, illustrating how scenario analysis can reveal both upside potential and tail exposure.
-
 ### Week 5 — Option Payoffs and Black-Scholes Pricing
 
 Built a pricing toolkit for European call and put options, starting from payoff functions and extending to Black-Scholes closed-form pricing.
@@ -120,8 +122,51 @@ SPY example:
 * strike chosen near spot
 * Black-Scholes call and put prices computed under an assumed volatility input
 
-**Key takeaway:**  
-Option pricing is not about forecasting the stock path directly. It is about valuing a contingent payoff under a pricing framework, and understanding how inputs such as volatility, maturity, and discounting affect that value.
+### Week 6 — Monte Carlo European Option Pricing and Implied Volatility Workflow
+
+Built a Monte Carlo pricing engine for European call options and validated it against the Black-Scholes benchmark before extending it to real-data-style and implied-volatility-based cases.
+
+Pipeline:
+
+* simulate terminal prices under risk-neutral GBM
+* compute discounted European call payoffs
+* estimate Monte Carlo option price
+* compute standard error and 95% confidence interval
+* benchmark Monte Carlo prices against Black-Scholes
+* test convergence by increasing the number of simulation paths
+* apply the pricer to a real-data-style SPY case using spot, maturity, and historical volatility
+* extend the workflow to a real listed SPY option by extracting a market option price and solving for implied volatility
+* reprice the same contract using both Black-Scholes and Monte Carlo under the implied-volatility input
+
+Baseline validation summary:
+
+* `n_paths = 100,000` → MC call price = `10.420541`, BS price = `10.450584`
+* 95% CI = `[10.328872, 10.512210]`
+* `n_paths = 400,000` → MC call price = `10.454033`, BS price = `10.450584`
+* 95% CI = `[10.408300, 10.499766]`
+* absolute error at `400,000` paths = `0.003449`
+
+Real-data-style SPY case:
+
+* spot proxy from raw close used as `S0`
+* historical volatility estimated from adjusted-close log returns
+* near-ATM strike selected from spot level
+* example result: MC call price = `12.250332`, BS price = `12.248816`
+* 95% CI = `[12.196878, 12.303786]`
+* intrinsic value = `0.440002`
+* time value ≈ `11.81`
+
+Implied-volatility SPY case:
+
+* selected a real listed SPY call near 30 days to expiry
+* used bid-ask midpoint as market price input during U.S. market hours
+* inverted Black-Scholes numerically to solve for implied volatility
+* midpoint-based market option price = `12.165000`
+* implied volatility = `0.137866`
+* BS price (using IV) = `12.165000`
+* MC price (using IV) = `12.166664`
+* 95% CI = `[12.112893, 12.220434]`
+* absolute error vs BS = `0.001664`
 
 ## Repository structure
 
@@ -130,6 +175,7 @@ Option pricing is not about forecasting the stock path directly. It is about val
 * `week03_spy_gbm/`
 * `week04_multi_asset_gbm/`
 * `week05_options/`
+* `week06_mc_option_pricer/`
 
 ## Tools and libraries
 
@@ -146,7 +192,7 @@ Activate the virtual environment in PowerShell:
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
-```
+````
 
 Install dependencies:
 
