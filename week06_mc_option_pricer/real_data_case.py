@@ -100,7 +100,7 @@ def main() -> None:
     print("\n=== Stage B: Real-Data-Style SPY Example ===")
     print(f"Ticker                 : {ticker}")
     print(f"Last observation date  : {close_prices.index[-1].date()}")
-    print(f"Latest spot S0         : {S0:.2f}")
+    print(f"Spot proxy S0 (Close)         : {S0:.2f}")
     print(f"Chosen strike K        : {K:.2f}")
     print(f"Maturity (days)        : {maturity_days}")
     print(f"Maturity T (years)     : {T:.6f}")

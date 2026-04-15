@@ -80,9 +80,9 @@ def print_validation_report(result: MonteCarloResult) -> None:
     print(f"Absolute error         : {result.absolute_error:.6f}")
 
     if result.ci_lower <= result.bs_price <= result.ci_upper:
-        print("Validaion check: Black-Scholes price lies inside the Monte Carlo confidence interval.")
+        print("Validation check: Black-Scholes price lies inside the Monte Carlo confidence interval.")
     else:
-        print("Validaion check: Black-Scholes price lies outside the Monte Carlo confidence interval.")
+        print("Validation check: Black-Scholes price lies outside the Monte Carlo confidence interval.")
 
 def main() -> None:
     S0 = 100.0
